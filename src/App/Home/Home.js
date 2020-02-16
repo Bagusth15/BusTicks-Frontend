@@ -1,114 +1,117 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+'use strict';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar
+  StatusBar,
+  FlatList,
+  TouchableOpacity,
+  Image
 } from 'react-native';
+import { Card, ListItem, Button, Icon, Input } from 'react-native-elements';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions
-} from 'react-native/Libraries/NewAppScreen';
+import RNPickerSelect from 'react-native-picker-select';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+import { faCity } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter
-  },
-  engine: {
-    position: 'absolute',
-    right: 0
-  },
-  body: {
-    backgroundColor: Colors.white
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark
-  },
-  highlight: {
-    fontWeight: '700'
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right'
+import SplashScreen from 'react-native-splash-screen';
+
+import styles from './styles';
+import DatePicker from '../../Public/components/DatePicker';
+
+class Home extends React.Component {
+  componentDidMount() {
+    SplashScreen.hide();
   }
-});
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { chosenDate: new Date() };
+  //   this.setDate = this.setDate.bind(this);
+  // }
+  // setDate(newDate) {
+  //   this.setState({ chosenDate: newDate });
+  // }
 
-export default App;
+  render() {
+    return (
+      <View style={styles.wrapper}>
+        <StatusBar backgroundColor="#0091ff" barStyle="light-content" />
+        <View style={styles.header} />
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <Text style={styles.heading}>Choose Trip</Text>
+
+            <View style={styles.itemList}>
+              <View style={{ flex: 0.1, alignSelf: 'center' }}>
+                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              </View>
+              <View style={{ flex: 0.9 }}>
+                <RNPickerSelect
+                  onValueChange={value => console.log(value)}
+                  placeholder={{
+                    label: 'From...',
+                    value: null,
+                    color: '#c3c4c6'
+                  }}
+                  items={[
+                    { label: 'Bogor', value: '1' },
+                    { label: 'Bandung', value: '2' },
+                    { label: 'Jakarta', value: '3' },
+                    { label: 'Bogor', value: '4' },
+                    { label: 'Bandung', value: '5' },
+                    { label: 'Jakarta', value: '6' },
+                    { label: 'Bogor', value: '6' },
+                    { label: 'Bandung', value: '8' },
+                    { label: 'Jakarta', value: '9' },
+                    { label: 'Bogor', value: '10' },
+                    { label: 'Bandung', value: '11' },
+                    { label: 'Jakarta', value: '12' }
+                  ]}
+                />
+              </View>
+            </View>
+            <View style={styles.itemList}>
+              <View
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'center'
+                }}>
+                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              </View>
+              <View style={{ flex: 0.9 }}>
+                <RNPickerSelect
+                  onValueChange={value => console.log(value)}
+                  placeholder={{
+                    label: 'To...',
+                    value: null,
+                    color: '#c3c4c6'
+                  }}
+                  items={[
+                    { label: 'Bogor', value: '1' },
+                    { label: 'Bandung', value: '2' },
+                    { label: 'Jakarta', value: '3' }
+                  ]}
+                />
+              </View>
+            </View>
+            <View style={styles.itemList}>
+              <View
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'center'
+                }}>
+                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              </View>
+              <View style={{ flex: 0.9 }}>
+                <DatePicker />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  }
+}
+export default Home;
