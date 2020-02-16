@@ -1,16 +1,11 @@
 package com.bustick;
 
-<<<<<<< HEAD
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 
 import org.devio.rn.splashscreen.SplashScreen;
 
-=======
-import com.facebook.react.ReactActivity;
-
->>>>>>> 292ccfb90773268e2cb177cd433bf4cce2cca7b4
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
@@ -26,14 +21,11 @@ public class MainActivity extends ReactActivity {
     return "bustick";
   }
   @Override
-<<<<<<< HEAD
   protected void onCreate(Bundle savedInstanceState) {
       SplashScreen.show(this);
       super.onCreate(savedInstanceState);
   }
   @Override
-=======
->>>>>>> 292ccfb90773268e2cb177cd433bf4cce2cca7b4
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegate(this, getMainComponentName()) {
       @Override

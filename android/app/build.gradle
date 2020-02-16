@@ -176,7 +176,6 @@ android {
 
         }
     }
-<<<<<<< HEAD
     packagingOptions {
        pickFirst '**/libjsc.so'
        pickFirst 'lib/x86/libc++_shared.so'
@@ -190,11 +189,6 @@ android {
 
 dependencies {
     implementation project(':react-native-splash-screen')
-=======
-}
-
-dependencies {
->>>>>>> 292ccfb90773268e2cb177cd433bf4cce2cca7b4
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 
