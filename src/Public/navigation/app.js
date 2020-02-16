@@ -2,30 +2,21 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { MultiBar, MultiBarToggle } from 'react-native-multibar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faHome,
-  faTicketAlt,
   faUserCircle,
   faListAlt,
-  faInbox,
-  faEnvelope,
-  faEnvelopeSquare,
-  faEnvelopeOpen,
   faEnvelopeOpenText
 } from '@fortawesome/free-solid-svg-icons';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Home from '../../App/Home';
 class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View>
         <Text>Settings!</Text>
-        <Icon name="area-chart" size={20} color={'#0091FF'} />
       </View>
     );
   }

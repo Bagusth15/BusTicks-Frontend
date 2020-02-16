@@ -14,31 +14,53 @@ const styles = {
     paddingTop: 30,
     paddingBottom: 30,
     borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 2
-    // justifyContent: 'flex-end'
+    borderBottomRightRadius: 2,
+    justifyContent: 'center'
   },
   content: {
     padding: 10,
-    flex: 0.6,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 15,
+    marginBottom: 20,
+    borderRadius: 15,
+    justifyContent: 'center',
+    elevation: 7,
+
     backgroundColor: '#fff'
   },
-
-  roadAsset: {
-    flexDirection: 'row',
-    backgroundColor: 'yellow',
-    flex: 0.2
+  button: {
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: '#0091ff'
+  },
+  buttonText: {
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 16
   },
 
   itemList: {
     marginBottom: 10,
     flexDirection: 'row',
-    backgroundColor: 'red'
+    borderColor: '#c3c4c6',
+    borderBottomWidth: 1.2,
+    backgroundColor: '#fff'
+  },
+
+  itemListChild: {
+    flex: 0.1,
+    alignSelf: 'center'
+  },
+  itemListChild2: {
+    flex: 0.9
   },
 
   heading: {
     fontSize: 16,
-    padding: 10,
-    marginBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     color: '#0a1e2d'
   },
   lineOption: {
@@ -62,12 +84,6 @@ const styles = {
   },
   inputCity: {
     backgroundColor: '#0091ff'
-  },
-
-  terminalList: {
-    flex: 0.4,
-    backgroundColor: '#f4f6f8',
-    justifyContent: 'center'
   }
 };
 export default styles;

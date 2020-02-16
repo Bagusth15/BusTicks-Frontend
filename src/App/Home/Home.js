@@ -1,15 +1,5 @@
-'use strict';
-
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  FlatList,
-  TouchableOpacity,
-  Image
-} from 'react-native';
-import { Card, ListItem, Button, Icon, Input } from 'react-native-elements';
+import React from 'react';
+import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -25,14 +15,6 @@ class Home extends React.Component {
   componentDidMount() {
     SplashScreen.hide();
   }
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { chosenDate: new Date() };
-  //   this.setDate = this.setDate.bind(this);
-  // }
-  // setDate(newDate) {
-  //   this.setState({ chosenDate: newDate });
-  // }
 
   render() {
     return (
@@ -44,12 +26,12 @@ class Home extends React.Component {
             <Text style={styles.heading}>Choose Trip</Text>
 
             <View style={styles.itemList}>
-              <View style={{ flex: 0.1, alignSelf: 'center' }}>
-                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              <View style={styles.itemListChild}>
+                <FontAwesomeIcon icon={faCity} color={'#c3c4c6'} size={22} />
               </View>
-              <View style={{ flex: 0.9 }}>
+              <View style={styles.itemListChild2}>
                 <RNPickerSelect
-                  onValueChange={value => console.log(value)}
+                  // onValueChange={value => console.log(value)}
                   placeholder={{
                     label: 'From...',
                     value: null,
@@ -61,28 +43,18 @@ class Home extends React.Component {
                     { label: 'Jakarta', value: '3' },
                     { label: 'Bogor', value: '4' },
                     { label: 'Bandung', value: '5' },
-                    { label: 'Jakarta', value: '6' },
-                    { label: 'Bogor', value: '6' },
-                    { label: 'Bandung', value: '8' },
-                    { label: 'Jakarta', value: '9' },
-                    { label: 'Bogor', value: '10' },
-                    { label: 'Bandung', value: '11' },
-                    { label: 'Jakarta', value: '12' }
+                    { label: 'Jakarta', value: '6' }
                   ]}
                 />
               </View>
             </View>
             <View style={styles.itemList}>
-              <View
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'center'
-                }}>
-                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              <View style={styles.itemListChild}>
+                <FontAwesomeIcon icon={faCity} color={'#c3c4c6'} size={22} />
               </View>
-              <View style={{ flex: 0.9 }}>
+              <View style={styles.itemListChild2}>
                 <RNPickerSelect
-                  onValueChange={value => console.log(value)}
+                  // onValueChange={value => console.log(value)}
                   placeholder={{
                     label: 'To...',
                     value: null,
@@ -96,19 +68,25 @@ class Home extends React.Component {
                 />
               </View>
             </View>
+          </View>
+
+          {/* second */}
+
+          <View style={styles.content}>
+            <Text style={styles.heading}>Choose Date</Text>
             <View style={styles.itemList}>
-              <View
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'center'
-                }}>
-                <FontAwesomeIcon icon={faCity} color={'blue'} size={22} />
+              <View style={styles.itemListChild}>
+                <FontAwesomeIcon icon={faCity} color={'#c3c4c6'} size={22} />
               </View>
-              <View style={{ flex: 0.9 }}>
+              <View style={styles.itemListChild2}>
                 <DatePicker />
               </View>
             </View>
           </View>
+
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Continue</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

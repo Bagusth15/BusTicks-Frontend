@@ -11,57 +11,48 @@ import {
   ToastAndroid
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons';
 import axios from 'axios';
-import qs from 'qs';
+import { connect } from 'react-redux';
 import { API_HOST } from 'react-native-dotenv';
 class Login extends Component {
-  // static navigationOptions = { headerShown: false };
   componentDidMount() {
     SplashScreen.hide();
   }
   state = {
+    name: '',
+    email: '',
     username: '',
-    password: ''
+    password: '',
+    confirm_password: ''
   };
 
   handleInput = (text, type) => {
     this.setState({ [type]: text });
   };
 
-  handleLogin = () => {
-    const { username, password } = this.state;
+  handleSubmitRegis = () => {
+    const { name, email, username, password, confirm_password } = this.state;
     const body = {
+      name,
+      email,
       username,
-      password
+      password,
+      confirm_password
     };
     axios
-      .post(`${API_HOST}/auth/login`, qs.stringify(body))
+      .post(`${API_HOST}/auth/register`, body)
       .then(response => {
-        console.log(response);
-
         if (response.status === 200) {
-          this.props.navigation.navigate('App');
-          this.props.setDataLogin(response.data.data);
-          // ToastAndroid.LONG('Username or Password Cannot be Empty');
-        } else if (
-          response.status === 200 &&
-          response.msg === 'Password Cannot be Empty'
-        ) {
-          ToastAndroid.LONG('Username or Password Cannot be Empty');
+          this.props.navigation.navigate('Login');
         }
       })
       .catch(err => {
-        ToastAndroid.SHORT('tes');
+        console.log(err);
       });
   };
 
-  handleRegis = () => {
-    this.props.navigation.navigate('Regis');
-  };
   render() {
-    console.log(this.state);
-
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -78,10 +69,24 @@ class Login extends Component {
               <View style={styles.subheader3}>
                 <View style={styles.welcometext}>
                   <Text style={styles.textwelcome}>
-                    Login to enjoy faster booking, secure payment and easy go
+                    Register to start enjoy life travel
                   </Text>
                 </View>
                 <View style={styles.containerinput}>
+                  <View style={styles.logininput}>
+                    <TextInput
+                      style={styles.inputs}
+                      placeholder="Name"
+                      onChangeText={text => this.handleInput(text, 'name')}
+                    />
+                  </View>
+                  <View style={styles.logininput}>
+                    <TextInput
+                      style={styles.inputs}
+                      placeholder="Email"
+                      onChangeText={text => this.handleInput(text, 'email')}
+                    />
+                  </View>
                   <View style={styles.logininput}>
                     <TextInput
                       style={styles.inputs}
@@ -97,23 +102,20 @@ class Login extends Component {
                       onChangeText={text => this.handleInput(text, 'password')}
                     />
                   </View>
-                  <TouchableOpacity>
-                    <View style={styles.headforget}>
-                      <Text style={styles.forget}>Forget the password?</Text>
+                  <View style={styles.logininput}>
+                    <TextInput
+                      style={styles.inputs}
+                      placeholder="Confirm Password"
+                      secureTextEntry
+                      onChangeText={text =>
+                        this.handleInput(text, 'confirm_password')
+                      }
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => this.handleSubmitRegis()}>
+                    <View style={styles.buttonregis}>
+                      <Text style={styles.textsubmitlogin}>Register</Text>
                     </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    activeOpacity={0.6}
-                    onPress={() => this.handleLogin()}>
-                    <View style={styles.buttonlogin}>
-                      <Text style={styles.textsubmitlogin}>Login</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.header3}>
-                  <Text style={styles.account}>Don't have an account?</Text>
-                  <TouchableOpacity onPress={() => this.handleRegis()}>
-                    <Text style={styles.register}>{''} REGISTER</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -125,24 +127,13 @@ class Login extends Component {
   }
 }
 
-const mapStateProps = state => {
+const mapStateToProps = state => {
   return {
     auth: state.auth
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  setDataLogin: payload =>
-    dispatch({
-      type: 'POST_LOGIN_FULFILLED',
-      payload
-    })
-});
-
-export default connect(
-  mapStateProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {
@@ -156,13 +147,14 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   header2: {
-    flex: 0.4,
+    flex: 0.3,
+    // borderWidth: 2,
     padding: 20,
     alignItems: 'center'
   },
   image: {
-    width: 300,
-    height: 250
+    width: 250,
+    height: 180
   },
   header3: {
     flexDirection: 'row',
@@ -170,19 +162,21 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   welcometext: {
-    alignItems: 'flex-start'
-    // borderWidth: 2
+    alignItems: 'flex-start',
+    padding: 4
   },
   logininput: {
     borderWidth: 1.5,
     borderRadius: 15,
     paddingLeft: 5,
-    marginTop: 10,
+    marginTop: 12,
+    height: 40,
     backgroundColor: '#f4f6f8'
   },
-  buttonlogin: {
-    margin: 12,
-    marginBottom: 15,
+  buttonregis: {
+    margin: 15,
+    marginTop: 30,
+    marginBottom: 10,
     borderRadius: 15,
     backgroundColor: '#0091ff',
     padding: 10,
@@ -196,7 +190,7 @@ const styles = StyleSheet.create({
   textwelcome: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 14
+    fontSize: 15
   },
   forget: {
     color: '#0091ff',
@@ -216,16 +210,14 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   subheader2: {
-    flex: 0.6,
+    flex: 0.7,
     backgroundColor: 'white',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40
   },
   subheader3: {
-    marginTop: 15,
-    margin: 5,
-    // borderWidth: 2,
-    padding: 12
+    padding: 16,
+    marginBottom: 2
   },
   headforget: {
     alignItems: 'flex-start',
