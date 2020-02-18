@@ -21,7 +21,6 @@ class Login extends Component {
   componentDidMount() {
     SplashScreen.hide();
   }
-  static navigationOptions = { tabBarVisible: false };
   state = {
     username: '',
     password: ''
@@ -42,7 +41,7 @@ class Login extends Component {
       .then(response => {
         const { msg } = response.data;
         if (msg === undefined) {
-          this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('Account');
           this.props.setDataLogin(response.data.data);
           toast('Success Login');
         } else {
@@ -60,7 +59,7 @@ class Login extends Component {
     this.props.navigation.navigate('Regis');
   };
   handleforget = () => {
-    this.props.navigation.navigate('forget');
+    this.props.navigation.navigate('Forgetpassword');
   };
 
   render() {
@@ -177,7 +176,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   image: {
-    width: 200,
+    width: 300,
     height: 250
   },
   header3: {

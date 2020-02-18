@@ -6,6 +6,7 @@ import { ListItem } from 'react-native-elements';
 import axios from 'axios';
 import { API_HOST } from 'react-native-dotenv';
 import toast from '../../Public/Component/Toast';
+
 class Changepassword extends Component {
   static navigationOptions = {
     title: 'Change Password'
@@ -49,7 +50,7 @@ class Changepassword extends Component {
       <View>
         <View style={styles.containermid}>
           <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
+            rightIcon={{ name: 'https', size: 18 }}
             bottomDivider
             title={
               <TextInput
@@ -61,7 +62,7 @@ class Changepassword extends Component {
             }
           />
           <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
+            rightIcon={{ name: 'https', size: 18 }}
             bottomDivider
             title={
               <TextInput
@@ -73,7 +74,7 @@ class Changepassword extends Component {
             }
           />
           <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
+            rightIcon={{ name: 'https', size: 18 }}
             bottomDivider
             title={
               <TextInput

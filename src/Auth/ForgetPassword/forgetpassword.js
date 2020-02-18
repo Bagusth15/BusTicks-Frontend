@@ -37,7 +37,7 @@ class forget extends Component {
     axios.post(`${API_HOST}/auth/forgot`, body).then(response => {
       const { msg } = response.data;
       if (msg === undefined) {
-        this.props.navigation.navigate('verification');
+        this.props.navigation.navigate('Verification');
         toast('Check your verification code in your email');
       } else {
         msg.map((item, index) => {

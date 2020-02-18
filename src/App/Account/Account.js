@@ -4,11 +4,18 @@ import SplashScreen from 'react-native-splash-screen';
 import { connect } from 'react-redux';
 import { ListItem, Icon } from 'react-native-elements';
 import toast from '../../Public/Component/Toast';
+import Modal, {
+  SlideAnimation,
+  ModalContent,
+  ModalTitle
+} from 'react-native-modals';
 class Home extends Component {
   componentDidMount() {
     SplashScreen.hide();
   }
-
+  state = {
+    aboutus: false
+  };
   handleLogin = () => {
     this.props.navigation.navigate('Login');
   };
@@ -27,8 +34,6 @@ class Home extends Component {
   };
 
   render() {
- 
-
     return (
       <View>
         <View style={styles.container}>
@@ -84,17 +89,26 @@ class Home extends Component {
             </View>
           )}
           <View style={styles.containermid}>
-            <ListItem
-              titleStyle={styles.title}
-              bottomDivider
-              title="My Journey"
-              chevron={styles.blackcode}
-            />
-            <ListItem
-              titleStyle={styles.title}
-              title="About Us"
-              chevron={styles.blackcode}
-            />
+            <TouchableOpacity>
+              <ListItem
+                titleStyle={styles.title}
+                bottomDivider
+                title="My Journey"
+                chevron={styles.blackcode}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({
+                  aboutus: true
+                });
+              }}>
+              <ListItem
+                titleStyle={styles.title}
+                title="About Us"
+                chevron={styles.blackcode}
+              />
+            </TouchableOpacity>
           </View>
           {this.props.auth.data.token === undefined ? null : (
             <View style={styles.containerend}>
@@ -108,6 +122,32 @@ class Home extends Component {
             </View>
           )}
         </View>
+        <Modal
+          width={0.8}
+          visible={this.state.aboutus}
+          rounded
+          onTouchOutside={() => {
+            this.setState({ aboutus: false });
+          }}
+          onSwipeOut={() => {
+            this.setState({ aboutus: false });
+          }}
+          swipeDirection={['down', 'up']}
+          modalAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+          modalTitle={<ModalTitle title="About Us" />}>
+          <ModalContent>
+            <Text style={styles.aboutus}>
+              Our bustick always committed to provide the best for this
+              application users and are always improving this application in
+              order to constantly develop and fit for use.
+            </Text>
+          </ModalContent>
+          <ModalContent>
+            <Text style={styles.signed}>
+              signed : Raga, Bagus, Najih Arkademy Batch 14
+            </Text>
+          </ModalContent>
+        </Modal>
       </View>
     );
   }
@@ -136,6 +176,18 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: 14
+  },
+  aboutus: {
+    color: 'black',
+    alignSelf: 'auto',
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  signed: {
+    color: 'black',
+    alignSelf: 'auto',
+    fontSize: 18,
+    textAlign: 'center'
   },
   icon1: {
     padding: 6

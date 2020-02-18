@@ -9,12 +9,15 @@ import {
   faListAlt,
   faEnvelopeOpenText
 } from '@fortawesome/free-solid-svg-icons';
-
 import Regis from '../../Auth/Regis/Regis';
 import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
 import SchedulePicker from '../Component/SchedulePicker';
+import Editprofile from '../../App/Editprofile/Editprofile';
+import Changepassword from '../../Auth/ChangePassword/changepassword';
+import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
+import Verification from '../../Auth/ForgetPassword/verificationpassword';
 class SettingsScreen extends React.Component {
   render() {
     return <SchedulePicker />;
@@ -27,14 +30,47 @@ const AccountScreen = createStackNavigator({
   },
   Login: {
     screen: Login,
-    navigationOptions: () => ({
+    navigationOptions: {
       tabBarVisible: false
-    })
+    }
   },
   Regis: {
     screen: Regis
+  },
+  Editprofile: {
+    screen: Editprofile
+  },
+  Changepassword: {
+    screen: Changepassword
+  },
+  Forgetpassword: {
+    screen: Forgetpassword
+  },
+  Verification: {
+    screen: Verification
   }
 });
+
+AccountScreen.navigationOptions = ({ navigation }) => {
+  let tabBarVisible;
+  if (navigation.state.routes.length > 1) {
+    navigation.state.routes.map(route => {
+      if (
+        route.routeName === 'Login' ||
+        route.routeName === 'Regis' ||
+        route.routeName === 'Forgetpassword' ||
+        route.routeName === 'Verification'
+      ) {
+        tabBarVisible = false;
+      } else {
+        tabBarVisible = true;
+      }
+    });
+  }
+  return {
+    tabBarVisible
+  };
+};
 
 const TabNavigator = createBottomTabNavigator(
   {
