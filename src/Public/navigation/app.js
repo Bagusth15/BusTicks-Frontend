@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
+import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faHome,
@@ -11,16 +10,31 @@ import {
   faEnvelopeOpenText
 } from '@fortawesome/free-solid-svg-icons';
 
+import Regis from '../../Auth/Regis/Regis';
 import Home from '../../App/Home';
+import Account from '../../App/Account';
+import Login from '../../Auth/Login';
+import SchedulePicker from '../Component/SchedulePicker';
 class SettingsScreen extends React.Component {
   render() {
-    return (
-      <View>
-        <Text>Settings!</Text>
-      </View>
-    );
+    return <SchedulePicker />;
   }
 }
+
+const AccountScreen = createStackNavigator({
+  Account: {
+    screen: Account
+  },
+  Login: {
+    screen: Login,
+    navigationOptions: () => ({
+      tabBarVisible: false
+    })
+  },
+  Regis: {
+    screen: Regis
+  }
+});
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -52,8 +66,8 @@ const TabNavigator = createBottomTabNavigator(
         )
       })
     },
-    Account: {
-      screen: SettingsScreen,
+    Accounts: {
+      screen: AccountScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <FontAwesomeIcon icon={faUserCircle} color={tintColor} size={22} />
@@ -72,4 +86,5 @@ const TabNavigator = createBottomTabNavigator(
     }
   }
 );
-export default createAppContainer(TabNavigator);
+
+export default createAppContainer(TabNavigator, AccountScreen);

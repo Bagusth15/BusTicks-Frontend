@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import SplashScreen from 'react-native-splash-screen';
 
 import styles from './styles';
-import DatePicker from '../../Public/components/DatePicker';
+import DatePicker from '../../Public/Component/DatePicker';
 
 class Home extends React.Component {
   componentDidMount() {

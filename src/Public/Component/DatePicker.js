@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DatePicker } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 export default class DatePickerr extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class DatePickerr extends Component {
     this.setState({ chosenDate: newDate });
   }
   render() {
-    console.log(this.state.chosenDate.toString().substr(4, 12));
+    // console.log(this.state.chosenDate.toString().substr(4, 12));
     return (
       <DatePicker
         locale={'en'}
@@ -20,11 +21,17 @@ export default class DatePickerr extends Component {
         animationType={'fade'}
         androidMode={'default'}
         placeHolderText="Select date"
-        textStyle={{ color: '#c3c4c6' }}
-        placeHolderTextStyle={{ color: '#c3c4c6' }}
+        textStyle={styles.color}
+        placeHolderTextStyle={styles.color}
         onDateChange={this.setDate}
         disabled={false}
       />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  color: {
+    color: '#c3c4c6'
+  }
+});

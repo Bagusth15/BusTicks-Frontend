@@ -27,10 +27,26 @@ const auth = (state = initialState, action) => {
         isLoading: false,
         data: []
       };
-    case 'UPDATE_DATA_PROFILE':
+    case 'GET_USER_PENDING':
+      return {
+        ...state,
+        isLoading: true
+      };
+    case 'GET_USER_REJECT':
       return {
         ...state,
         isLoading: false
+      };
+    case 'GET_USER_FULFILLED':
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload
+      };
+    case 'UPDATE_DATA_PROFILE':
+      return {
+        ...state,
+        data: { ...state.data, ...action.payload }
       };
     default:
       return state;
