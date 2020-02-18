@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  ToastAndroid,
   ScrollView
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
@@ -17,6 +16,7 @@ import ImagePicker from 'react-native-image-picker';
 import getUser from '../Account/action';
 import axios from 'axios';
 import { API_HOST } from 'react-native-dotenv';
+import toast from '../../Public/Component/Toast';
 class Home extends Component {
   componentDidMount() {
     SplashScreen.hide();
@@ -72,35 +72,22 @@ class Home extends Component {
       .put(`${API_HOST}/user/update/profile/${id}`, body)
       .then(response => {
         if (this.state.image === '') {
-          ToastAndroid.showWithGravityAndOffset(
-            'Select a image',
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM,
-            0,
-            150
-          );
+          toast('Select a image');
         } else {
           const { msg } = response.data;
           if (msg === undefined) {
             this.props.navigation.navigate('Account');
             this.props.updateProfile(response.data.data);
+            toast('Success Edit Profile');
           } else {
             msg.map((item, index) => {
-              ToastAndroid.showWithGravity(
-                item.error,
-                ToastAndroid.LONG,
-                ToastAndroid.BOTTOM
-              );
+              toast(item.error);
             });
           }
         }
       })
       .catch(() => {
-        ToastAndroid.showWithGravity(
-          'Cannot save change please check your filled',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM
-        );
+        toast('Cannot save change please check your filled');
       });
   };
 

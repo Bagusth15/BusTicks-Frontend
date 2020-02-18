@@ -6,15 +6,16 @@ import { ListItem } from 'react-native-elements';
 import axios from 'axios';
 import { API_HOST } from 'react-native-dotenv';
 import toast from '../../Public/Component/Toast';
-class Changepassword extends Component {
+
+class verification extends Component {
   static navigationOptions = {
-    title: 'Change Password'
+    title: 'Reset Password'
   };
 
   state = {
-    old_password: '',
-    new_password: '',
-    confirm_password: ''
+    password: '',
+    confirm_password: '',
+    key_user: ''
   };
 
   componentDidMount() {
@@ -25,17 +26,17 @@ class Changepassword extends Component {
     this.setState({ [type]: input });
   };
 
-  handleChange = id => {
+  handleReset = () => {
     let body = {
-      old_password: this.state.old_password,
-      new_password: this.state.new_password,
-      confirm_password: this.state.confirm_password
+      password: this.state.password,
+      confirm_password: this.state.confirm_password,
+      key_user: this.state.key_user
     };
-    axios.put(`${API_HOST}/user/update/password/${id}`, body).then(response => {
+    axios.put(`${API_HOST}/auth/reset/`, body).then(response => {
       const { msg } = response.data;
       if (msg === undefined) {
-        this.props.navigation.navigate('Editprofile');
-        toast('Password Success Change');
+        toast('Password Success Reset');
+        this.props.navigation.navigate('Login');
       } else {
         msg.map((item, index) => {
           toast(item.error);
@@ -49,31 +50,19 @@ class Changepassword extends Component {
       <View>
         <View style={styles.containermid}>
           <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
+            rightIcon={{ name: 'https', size: 18 }}
             bottomDivider
             title={
               <TextInput
-                onChangeText={input => this.handleInput(input, 'old_password')}
+                onChangeText={input => this.handleInput(input, 'password')}
                 style={styles.inputedit}
-                placeholder={'old password'}
+                placeholder={'New Password'}
                 secureTextEntry
               />
             }
           />
           <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
-            bottomDivider
-            title={
-              <TextInput
-                onChangeText={input => this.handleInput(input, 'new_password')}
-                style={styles.inputedit}
-                placeholder={'new password'}
-                secureTextEntry
-              />
-            }
-          />
-          <ListItem
-            rightIcon={{ name: 'edit', size: 18 }}
+            rightIcon={{ name: 'https', size: 18 }}
             bottomDivider
             title={
               <TextInput
@@ -81,14 +70,24 @@ class Changepassword extends Component {
                   this.handleInput(input, 'confirm_password')
                 }
                 style={styles.inputedit}
-                placeholder={'confirm password'}
+                placeholder={'Confirm New Password'}
                 secureTextEntry
               />
             }
           />
-          <TouchableOpacity
-            onPress={() => this.handleChange(this.props.auth.data.id)}>
-            <ListItem title={'Save Changes'} titleStyle={styles.titlesave} />
+          <ListItem
+            rightIcon={{ name: 'vpn-key', size: 18 }}
+            bottomDivider
+            title={
+              <TextInput
+                onChangeText={input => this.handleInput(input, 'key_user')}
+                style={styles.inputedit}
+                placeholder={'Verification Code'}
+              />
+            }
+          />
+          <TouchableOpacity onPress={() => this.handleReset()}>
+            <ListItem title={'Reset Password'} titleStyle={styles.titlesave} />
           </TouchableOpacity>
         </View>
       </View>
@@ -102,7 +101,7 @@ const mapStateProps = state => {
   };
 };
 
-export default connect(mapStateProps)(Changepassword);
+export default connect(mapStateProps)(verification);
 
 const styles = StyleSheet.create({
   title: {
@@ -202,11 +201,11 @@ const styles = StyleSheet.create({
     color: '#0091ff'
   },
   containermid: {
-    padding: 5,
+    padding: 16,
     backgroundColor: 'white',
     borderRadius: 10,
     elevation: 7,
-    margin: 10,
+    margin: 16,
     marginTop: 20
   },
   containerend: {

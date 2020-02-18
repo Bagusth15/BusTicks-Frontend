@@ -5,6 +5,8 @@ import Login from '../../Auth/Login';
 import Regis from '../../Auth/Regis/Regis';
 import Editprofile from '../../App/Editprofile';
 import Changepassword from '../../Auth/ChangePassword';
+import forget from '../../Auth/ForgetPassword/forgetpassword';
+import verification from '../../Auth/ForgetPassword//verificationpassword';
 
 export default createStackNavigator({
   Home,
@@ -12,5 +14,7 @@ export default createStackNavigator({
   Editprofile,
   Changepassword,
   Login,
-  Regis
+  Regis,
+  forget,
+  verification
 });

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { connect } from 'react-redux';
 import { ListItem, Icon } from 'react-native-elements';
+import toast from '../../Public/Component/Toast';
 class Home extends Component {
   componentDidMount() {
     SplashScreen.hide();
@@ -18,6 +19,7 @@ class Home extends Component {
   handleLogout = () => {
     this.props.setDataLogout();
     this.props.navigation.navigate('Account');
+    toast('Logout Success');
   };
 
   handleEditprofile = () => {
