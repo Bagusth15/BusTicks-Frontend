@@ -4,8 +4,9 @@ const styles = {
     backgroundColor: '#f4f6f8'
   },
   header: {
-    height: 58,
-    backgroundColor: '#0091ff'
+    height: 60,
+    backgroundColor: '#0091ff',
+    elevation: 7
   },
   container: {
     flex: 1,

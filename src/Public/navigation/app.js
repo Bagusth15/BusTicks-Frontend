@@ -15,9 +15,15 @@ import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
 import SchedulePicker from '../Component/SchedulePicker';
+import TerminalPicker from '../Component/TerminalPicker';
 class SettingsScreen extends React.Component {
   render() {
     return <SchedulePicker />;
+  }
+}
+class TerminalScreen extends React.Component {
+  render() {
+    return <TerminalPicker />;
   }
 }
 
@@ -55,7 +61,7 @@ const TabNavigator = createBottomTabNavigator(
       })
     },
     Inbox: {
-      screen: SettingsScreen,
+      screen: TerminalScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <FontAwesomeIcon
