@@ -11,7 +11,6 @@ import {
   ToastAndroid
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import Icon from 'react-native-vector-icons';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { API_HOST } from 'react-native-dotenv';
@@ -19,6 +18,9 @@ class Login extends Component {
   componentDidMount() {
     SplashScreen.hide();
   }
+  static navigationOptions = {
+    title: 'Registration'
+  };
   state = {
     name: '',
     email: '',
@@ -43,29 +45,46 @@ class Login extends Component {
     axios
       .post(`${API_HOST}/auth/register`, body)
       .then(response => {
-        if (response.status === 200) {
+        const { msg } = response.data;
+        if (msg === undefined) {
           this.props.navigation.navigate('Login');
+        } else {
+          msg.map((item, index) => {
+            ToastAndroid.showWithGravityAndOffset(
+              item.error,
+              ToastAndroid.LONG,
+              ToastAndroid.BOTTOM,
+              0,
+              80
+            );
+          });
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        ToastAndroid.showWithGravityAndOffset(
+          'Please check all column must filled',
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM,
+          0,
+          80
+        );
       });
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          source={require('../../Public/Assets/Image/background4.jpg')}
-          style={styles.background}>
-          <View style={styles.header2}>
-            <Image
-              style={styles.image}
-              source={require('../../Public/Assets/Image/pic2.png')}
-            />
-          </View>
-          <View style={styles.subheader2}>
-            <ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
+          <ImageBackground
+            source={require('../../Public/Assets/Image/background4.jpg')}
+            style={styles.background}>
+            <View style={styles.header2}>
+              <Image
+                style={styles.image}
+                source={require('../../Public/Assets/Image/pic2.png')}
+              />
+            </View>
+            <View style={styles.subheader2}>
               <View style={styles.subheader3}>
                 <View style={styles.welcometext}>
                   <Text style={styles.textwelcome}>
@@ -119,10 +138,10 @@ class Login extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            </ScrollView>
-          </View>
-        </ImageBackground>
-      </View>
+            </View>
+          </ImageBackground>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -148,18 +167,12 @@ const styles = StyleSheet.create({
   },
   header2: {
     flex: 0.3,
-    // borderWidth: 2,
     padding: 20,
     alignItems: 'center'
   },
   image: {
     width: 250,
     height: 180
-  },
-  header3: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 10
   },
   welcometext: {
     alignItems: 'flex-start',
@@ -175,7 +188,7 @@ const styles = StyleSheet.create({
   },
   buttonregis: {
     margin: 15,
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 10,
     borderRadius: 15,
     backgroundColor: '#0091ff',
@@ -192,11 +205,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 15
   },
-  forget: {
-    color: '#0091ff',
-    fontWeight: 'bold',
-    fontSize: 12
-  },
   inputs: {
     fontSize: 15
   },
@@ -204,20 +212,17 @@ const styles = StyleSheet.create({
     color: '#0091ff',
     alignSelf: 'center'
   },
-  account: {
-    alignSelf: 'center',
-    color: 'black',
-    fontSize: 12
-  },
   subheader2: {
     flex: 0.7,
     backgroundColor: 'white',
     borderTopLeftRadius: 40,
-    borderTopRightRadius: 40
+    borderTopRightRadius: 40,
+    padding: 10,
+    borderWidth: 2
   },
   subheader3: {
-    padding: 16,
-    marginBottom: 2
+    padding: 18,
+    borderWidth: 2
   },
   headforget: {
     alignItems: 'flex-start',

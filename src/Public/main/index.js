@@ -1,43 +1,25 @@
-'use strict';
-
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Linking
-} from 'react-native';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 
-export default class example extends Component {
+class index extends Component {
   componentDidMount() {
     SplashScreen.hide();
+    if (this.props.auth.data.token) {
+      this.props.navigation.navigate('App');
+    } else {
+      this.props.navigation.navigate('App');
+    }
   }
 
   render() {
-    return (
-      <View>
-        <Text style={{ fontSize: 26, alignSelf: 'center', color: 'orange' }}>
-          Kambing...
-        </Text>
-      </View>
-    );
+    return null;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f3f2f2',
-    marginTop: 30
-  },
-  item: {
-    fontSize: 20
-  },
-  line: {
-    flex: 1,
-    height: 0.3,
-    backgroundColor: 'darkgray'
-  }
-});
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(mapStateToProps)(index);

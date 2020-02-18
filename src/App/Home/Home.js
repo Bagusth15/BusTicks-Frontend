@@ -8,17 +8,16 @@ class Home extends Component {
     SplashScreen.hide();
   }
 
-  handleLogout = () => {
-    this.props.setDataLogout();
-    this.props.navigation.navigate('Auth');
+  handle = () => {
+    this.props.navigation.navigate('Account');
   };
 
   render() {
     return (
       <View>
-        <TouchableOpacity onPress={() => this.handleLogout()}>
+        <TouchableOpacity onPress={() => this.handle()}>
           <Text style={{ fontSize: 26, alignSelf: 'center', color: 'orange' }}>
-            Logout
+            Account
           </Text>
         </TouchableOpacity>
       </View>

@@ -38,21 +38,26 @@ class Login extends Component {
     axios
       .post(`${API_HOST}/auth/login`, qs.stringify(body))
       .then(response => {
-        console.log(response);
-
-        if (response.status === 200) {
-          this.props.navigation.navigate('App');
+        const { msg } = response.data;
+        if (msg === undefined) {
+          this.props.navigation.navigate('Home');
           this.props.setDataLogin(response.data.data);
-          // ToastAndroid.LONG('Username or Password Cannot be Empty');
-        } else if (
-          response.status === 200 &&
-          response.msg === 'Password Cannot be Empty'
-        ) {
-          ToastAndroid.LONG('Username or Password Cannot be Empty');
+        } else {
+          msg.map((item, index) => {
+            ToastAndroid.showWithGravity(
+              item.error,
+              ToastAndroid.LONG,
+              ToastAndroid.BOTTOM
+            );
+          });
         }
       })
-      .catch(err => {
-        ToastAndroid.SHORT('tes');
+      .catch(() => {
+        ToastAndroid.showWithGravity(
+          'Cannot login please check your username and password',
+          ToastAndroid.LONG,
+          ToastAndroid.BOTTOM
+        );
       });
   };
 
@@ -60,21 +65,19 @@ class Login extends Component {
     this.props.navigation.navigate('Regis');
   };
   render() {
-    console.log(this.state);
-
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          source={require('../../Public/Assets/Image/background4.jpg')}
-          style={styles.background}>
-          <View style={styles.header2}>
-            <Image
-              style={styles.image}
-              source={require('../../Public/Assets/Image/pic2.png')}
-            />
-          </View>
-          <View style={styles.subheader2}>
-            <ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
+          <ImageBackground
+            source={require('../../Public/Assets/Image/background4.jpg')}
+            style={styles.background}>
+            <View style={styles.header2}>
+              <Image
+                style={styles.image}
+                source={require('../../Public/Assets/Image/pic2.png')}
+              />
+            </View>
+            <View style={styles.subheader2}>
               <View style={styles.subheader3}>
                 <View style={styles.welcometext}>
                   <Text style={styles.textwelcome}>
@@ -106,7 +109,7 @@ class Login extends Component {
                     activeOpacity={0.6}
                     onPress={() => this.handleLogin()}>
                     <View style={styles.buttonlogin}>
-                      <Text style={styles.textsubmitlogin}>Login</Text>
+                      <Text style={styles.textsubmitlogin}>LOGIN</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -117,10 +120,10 @@ class Login extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            </ScrollView>
-          </View>
-        </ImageBackground>
-      </View>
+            </View>
+          </ImageBackground>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -171,7 +174,6 @@ const styles = StyleSheet.create({
   },
   welcometext: {
     alignItems: 'flex-start'
-    // borderWidth: 2
   },
   logininput: {
     borderWidth: 1.5,
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
   buttonlogin: {
     margin: 12,
     marginBottom: 15,
-    borderRadius: 15,
+    borderRadius: 30,
     backgroundColor: '#0091ff',
     padding: 10,
     alignItems: 'center'
@@ -224,8 +226,7 @@ const styles = StyleSheet.create({
   subheader3: {
     marginTop: 15,
     margin: 5,
-    // borderWidth: 2,
-    padding: 12
+    padding: 20
   },
   headforget: {
     alignItems: 'flex-start',
