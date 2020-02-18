@@ -21,6 +21,7 @@ class Login extends Component {
   componentDidMount() {
     SplashScreen.hide();
   }
+  static navigationOptions = { tabBarVisible: false };
   state = {
     username: '',
     password: ''
