@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  TextInput
+} from 'react-native';
 
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -30,22 +36,9 @@ class Home extends React.Component {
                 <FontAwesomeIcon icon={faCity} color={'#c3c4c6'} size={22} />
               </View>
               <View style={styles.itemListChild2}>
-                <RNPickerSelect
-                  // onValueChange={value => console.log(value)}
-                  placeholder={{
-                    label: 'From...',
-                    value: null,
-                    color: '#c3c4c6'
-                  }}
-                  items={[
-                    { label: 'Bogor', value: '1' },
-                    { label: 'Bandung', value: '2' },
-                    { label: 'Jakarta', value: '3' },
-                    { label: 'Bogor', value: '4' },
-                    { label: 'Bandung', value: '5' },
-                    { label: 'Jakarta', value: '6' }
-                  ]}
-                />
+                <TouchableOpacity>
+                  <TextInput placeholder="From..." />
+                </TouchableOpacity>
               </View>
             </View>
             <View style={styles.itemList}>

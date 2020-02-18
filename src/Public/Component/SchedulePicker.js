@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const datass = [
@@ -66,6 +66,11 @@ export default class Terminal extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
+        <View style={styles.header}>
+          <View style={styles.iconBack}>
+            <FontAwesomeIcon icon={faArrowLeft} color={'#f4f6f8'} size={18} />
+          </View>
+        </View>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={datass}
@@ -122,6 +127,20 @@ const styles = StyleSheet.create({
     flex: 1,
 
     backgroundColor: '#f4f6f8'
+  },
+  header: {
+    height: 60,
+    backgroundColor: '#0091ff',
+    elevation: 7,
+    paddingLeft: 20,
+    paddingRight: 20,
+    flexDirection: 'row',
+    paddingBottom: 6,
+    paddingTop: 6,
+    alignItems: 'center'
+  },
+  iconBack: {
+    flex: 0.1
   },
   content: {
     marginLeft: 20,

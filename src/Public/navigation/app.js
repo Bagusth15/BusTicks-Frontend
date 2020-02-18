@@ -14,13 +14,22 @@ import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
 import SchedulePicker from '../Component/SchedulePicker';
+<<<<<<< HEAD
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
 import Verification from '../../Auth/ForgetPassword/verificationpassword';
+=======
+import TerminalPicker from '../Component/TerminalPicker';
+>>>>>>> b05721fbb5639e82ba11e48812b5fee214750713
 class SettingsScreen extends React.Component {
   render() {
     return <SchedulePicker />;
+  }
+}
+class TerminalScreen extends React.Component {
+  render() {
+    return <TerminalPicker />;
   }
 }
 
@@ -91,7 +100,7 @@ const TabNavigator = createBottomTabNavigator(
       })
     },
     Inbox: {
-      screen: SettingsScreen,
+      screen: TerminalScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <FontAwesomeIcon
