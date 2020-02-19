@@ -161,7 +161,7 @@ class Terminal extends Component {
                   onPress={() => this.handledeparturefilter('2')}>
                   <View style={styles.modallistitem}>
                     <ListItem
-                      subtitle={'00:06 - 12:00'}
+                      subtitle={'06:00 - 12:00'}
                       bottomDivider
                       subtitleStyle={styles.textmodal}
                     />
@@ -172,6 +172,15 @@ class Terminal extends Component {
                   <View style={styles.modallistitem}>
                     <ListItem
                       subtitle={'12:00 - 18:00'}
+                      bottomDivider
+                      subtitleStyle={styles.textmodal}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.handlearrivalfilter('4')}>
+                  <View style={styles.modallistitem}>
+                    <ListItem
+                      subtitle={'18:00 - 00:00'}
                       bottomDivider
                       subtitleStyle={styles.textmodal}
                     />
@@ -195,7 +204,7 @@ class Terminal extends Component {
                 <TouchableOpacity onPress={() => this.handlearrivalfilter('2')}>
                   <View style={styles.modallistitem}>
                     <ListItem
-                      subtitle={'00:06 - 12:00'}
+                      subtitle={'06:00 - 12:00'}
                       bottomDivider
                       subtitleStyle={styles.textmodal}
                     />
@@ -205,6 +214,15 @@ class Terminal extends Component {
                   <View style={styles.modallistitem}>
                     <ListItem
                       subtitle={'12:00 - 18:00'}
+                      bottomDivider
+                      subtitleStyle={styles.textmodal}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.handlearrivalfilter('4')}>
+                  <View style={styles.modallistitem}>
+                    <ListItem
+                      subtitle={'18:00 - 00:00'}
                       bottomDivider
                       subtitleStyle={styles.textmodal}
                     />
