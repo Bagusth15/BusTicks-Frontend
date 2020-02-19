@@ -6,14 +6,10 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-
 import RNPickerSelect from 'react-native-picker-select';
-
 import { faCity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-
 import SplashScreen from 'react-native-splash-screen';
-
 import styles from './styles';
 import DatePicker from '../../Public/Component/DatePicker';
 
@@ -21,6 +17,9 @@ class Home extends React.Component {
   componentDidMount() {
     SplashScreen.hide();
   }
+  static navigationOptions = {
+    header: null
+  };
 
   render() {
     return (

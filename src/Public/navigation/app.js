@@ -13,15 +13,12 @@ import Regis from '../../Auth/Regis/Regis';
 import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
-import SchedulePicker from '../Component/SchedulePicker';
-<<<<<<< HEAD
+import SchedulePicker from '../../App/Schedule/SchedulePicker';
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
 import Verification from '../../Auth/ForgetPassword/verificationpassword';
-=======
 import TerminalPicker from '../Component/TerminalPicker';
->>>>>>> b05721fbb5639e82ba11e48812b5fee214750713
 class SettingsScreen extends React.Component {
   render() {
     return <SchedulePicker />;
@@ -38,10 +35,7 @@ const AccountScreen = createStackNavigator({
     screen: Account
   },
   Login: {
-    screen: Login,
-    navigationOptions: {
-      tabBarVisible: false
-    }
+    screen: Login
   },
   Regis: {
     screen: Regis
