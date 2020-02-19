@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { ListItem } from 'react-native-elements';
 import NumberFormat from 'react-number-format';
 import styles from './styles';
 
@@ -14,7 +13,6 @@ class Detail extends Component {
   };
 
   render() {
-    console.log(this.state.detail);
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
@@ -63,7 +61,7 @@ class Detail extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => this.onPress()}>
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>Select</Text>
           </TouchableOpacity>
         </View>
       </View>

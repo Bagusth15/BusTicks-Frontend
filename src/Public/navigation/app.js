@@ -103,14 +103,6 @@ export default createBottomTabNavigator(
         )
       })
     },
-    // Booking: {
-    //   screen: SettingsScreen,
-    //   navigationOptions: () => ({
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <FontAwesomeIcon icon={faListAlt} color={tintColor} size={22} />
-    //     )
-    //   })
-    // },
     Inbox: {
       screen: TerminalScreen,
       navigationOptions: () => ({
