@@ -23,8 +23,8 @@ class Terminal extends Component {
   }
   state = {
     filterModal: false,
-    sortModal: false,
-    dataBooking: this.props.navigation.state.params.data_booking
+    sortModal: false
+    // dataBooking: this.props.navigation.state.params.data_booking
   };
 
   getSchedule = () => {
@@ -58,7 +58,7 @@ class Terminal extends Component {
   };
 
   handlehome = () => {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('History');
   };
 
   handledeparturefilter = id => {

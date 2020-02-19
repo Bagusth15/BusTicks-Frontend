@@ -9,6 +9,7 @@ import Modal, {
   ModalContent,
   ModalTitle
 } from 'react-native-modals';
+import { API_HOST } from 'react-native-dotenv';
 class Home extends Component {
   componentDidMount() {
     SplashScreen.hide();
@@ -25,12 +26,17 @@ class Home extends Component {
 
   handleLogout = () => {
     this.props.setDataLogout();
+    this.props.setRemoveHistory();
     this.props.navigation.navigate('Account');
     toast('Logout Success');
   };
 
   handleEditprofile = () => {
     this.props.navigation.navigate('Editprofile');
+  };
+
+  handleHistory = () => {
+    this.props.navigation.navigate('History');
   };
 
   render() {
@@ -80,7 +86,10 @@ class Home extends Component {
                 ) : (
                   <Image
                     source={{
-                      uri: 'http://localhost:3001/' + this.props.auth.data.image
+                      uri:
+                        `${API_HOST}` +
+                        '/uploads/userProfile/' +
+                        this.props.auth.data.image
                     }}
                     style={styles.avatar}
                   />
@@ -89,14 +98,16 @@ class Home extends Component {
             </View>
           )}
           <View style={styles.containermid}>
-            <TouchableOpacity>
-              <ListItem
-                titleStyle={styles.title}
-                bottomDivider
-                title="My Journey"
-                chevron={styles.blackcode}
-              />
-            </TouchableOpacity>
+            {this.props.auth.data.token === undefined ? null : (
+              <TouchableOpacity onPress={() => this.handleHistory()}>
+                <ListItem
+                  titleStyle={styles.title}
+                  bottomDivider
+                  title="My Journey"
+                  chevron={styles.blackcode}
+                />
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               onPress={() => {
                 this.setState({
@@ -163,6 +174,11 @@ const mapDispatchToProps = dispatch => ({
   setDataLogout: payload =>
     dispatch({
       type: 'POST_LOGOUT',
+      payload
+    }),
+  setRemoveHistory: payload =>
+    dispatch({
+      type: 'HISTORY_EMPTY',
       payload
     })
 });

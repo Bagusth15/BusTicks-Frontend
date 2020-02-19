@@ -36,7 +36,7 @@ class Home extends Component {
   chooseFile = () => {
     const options = {
       title: 'Select Image',
-      quality: 1,
+      quality: 0.7,
       storageOptions: {
         skipBackup: true,
         path: 'images'
@@ -86,8 +86,9 @@ class Home extends Component {
           }
         }
       })
-      .catch(() => {
+      .catch(err => {
         toast('Cannot save change please check your filled');
+        console.log(err);
       });
   };
 
@@ -134,7 +135,8 @@ class Home extends Component {
                           ? this.state.filePath
                           : {
                               uri:
-                                'http://localhost:3001/' +
+                                `${API_HOST}` +
+                                '/uploads/userProfile/' +
                                 this.props.auth.data.image
                             }
                       }
