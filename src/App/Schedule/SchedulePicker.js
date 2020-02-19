@@ -19,7 +19,7 @@ import Modal, { ModalContent, ModalTitle } from 'react-native-modals';
 
 class Terminal extends Component {
   componentDidMount() {
-    this.props.dispatch(getScheduled());
+    this.getSchedule();
   }
   state = {
     filterModal: false,
@@ -27,17 +27,34 @@ class Terminal extends Component {
     dataBooking: this.props.navigation.state.params.data_booking
   };
 
-  changeSearch = text => {
+  getSchedule = () => {
+    const dataBooking = this.state.dataBooking;
     const config = {
       params: {
-        searcNameBus: text
+        searchDate: dataBooking.date,
+        searchCityDeparture: dataBooking.departure_id,
+        searchCityArrival: dataBooking.arrival_id
+      }
+    };
+    this.props.dispatch(getScheduled(config));
+  };
+
+  changeSearch = text => {
+    const dataBooking = this.state.dataBooking;
+    const config = {
+      params: {
+        searcNameBus: text,
+        searchDate: dataBooking.date,
+        searchCityDeparture: dataBooking.departure_id,
+        searchCityArrival: dataBooking.arrival_id
       }
     };
     this.props.dispatch(getScheduled(config));
   };
 
   handleReset = () => {
-    this.props.dispatch(getScheduled());
+    // this.props.dispatch(getScheduled());
+    this.getSchedule();
   };
 
   handlehome = () => {
@@ -45,37 +62,52 @@ class Terminal extends Component {
   };
 
   handledeparturefilter = id => {
+    const dataBooking = this.state.dataBooking;
     const config = {
       params: {
-        searchTimeDeparture: id
+        searchTimeDeparture: id,
+        searchDate: dataBooking.date,
+        searchCityDeparture: dataBooking.departure_id,
+        searchCityArrival: dataBooking.arrival_id
       }
     };
     this.props.dispatch(getScheduled(config));
   };
 
   handlearrivalfilter = id => {
+    const dataBooking = this.state.dataBooking;
     const config = {
       params: {
-        searchTimeArrival: id
+        searchTimeArrival: id,
+        searchDate: dataBooking.date,
+        searchCityDeparture: dataBooking.departure_id,
+        searchCityArrival: dataBooking.arrival_id
       }
     };
     this.props.dispatch(getScheduled(config));
   };
 
   handlesort = query => {
+    const dataBooking = this.state.dataBooking;
     const config = {
       params: {
-        sort: query
+        sort: query,
+        searchDate: dataBooking.date,
+        searchCityDeparture: dataBooking.departure_id,
+        searchCityArrival: dataBooking.arrival_id
       }
     };
     this.props.dispatch(getScheduled(config));
   };
 
   handleSchedule = () => {
-    this.props.navigation.navigate('SeatBus');
+    this.props.navigation.navigate('Detail', {
+      detail_bus: this.props.getSchedule.data.data.data.result
+    });
   };
 
   render() {
+    // console.log(this.props.getSchedule.data.data.data.result);
     let data = [];
     if (this.props.getSchedule.data.data === undefined) {
       data = [];

@@ -16,7 +16,7 @@ import Login from '../../Auth/Login';
 import TerminalPicker from '../Component/TerminalPicker';
 
 import Schedule from '../../App/Schedule/SchedulePicker';
-import SeatBus from '../Component/SeatPicker';
+import Detail from '../../App/Detail/Detail';
 
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
@@ -58,10 +58,13 @@ const HomeScreen = createStackNavigator({
     screen: Home
   },
   Schedule: {
-    screen: Schedule
+    screen: Schedule,
+    navigationOptions: {
+      headerShown: false
+    }
   },
-  SeatBus: {
-    screen: SeatBus
+  Detail: {
+    screen: Detail
   }
 });
 
