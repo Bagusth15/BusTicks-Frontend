@@ -15,6 +15,8 @@ import Login from '../../Auth/Login';
 import Schedule from '../../App/Schedule/SchedulePicker';
 import SeatBus from '../Component/SeatPicker';
 import History from '../../App/History/history';
+import Detail from '../../App/Detail/Detail';
+
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
@@ -55,10 +57,13 @@ const HomeScreen = createStackNavigator({
     screen: Home
   },
   Schedule: {
-    screen: Schedule
+    screen: Schedule,
+    navigationOptions: {
+      headerShown: false
+    }
   },
-  SeatBus: {
-    screen: SeatBus
+  Detail: {
+    screen: Detail
   }
 });
 
