@@ -12,22 +12,13 @@ import Regis from '../../Auth/Regis/Regis';
 import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
-
-import TerminalPicker from '../Component/TerminalPicker';
-
 import Schedule from '../../App/Schedule/SchedulePicker';
 import SeatBus from '../Component/SeatPicker';
-
+import History from '../../App/History/history';
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
 import Verification from '../../Auth/ForgetPassword/verificationpassword';
-
-class TerminalScreen extends React.Component {
-  render() {
-    return <TerminalPicker />;
-  }
-}
 
 const AccountScreen = createStackNavigator({
   Account: {
@@ -50,6 +41,12 @@ const AccountScreen = createStackNavigator({
   },
   Verification: {
     screen: Verification
+  }
+});
+
+const HistoryScreen = createStackNavigator({
+  History: {
+    screen: History
   }
 });
 
@@ -105,7 +102,7 @@ export default createBottomTabNavigator(
     //   })
     // },
     Inbox: {
-      screen: TerminalScreen,
+      screen: HistoryScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <FontAwesomeIcon

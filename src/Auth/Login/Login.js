@@ -37,7 +37,7 @@ class Login extends Component {
       password
     };
     axios
-      .post(`${API_HOST}/auth/login`, qs.stringify(body))
+      .post(`${API_HOST}/auth/login/`, qs.stringify(body))
       .then(response => {
         const { msg } = response.data;
         if (msg === undefined) {
@@ -138,7 +138,8 @@ class Login extends Component {
 
 const mapStateProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    historybook: state.history
   };
 };
 
