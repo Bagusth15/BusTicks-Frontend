@@ -23,8 +23,8 @@ class Terminal extends Component {
   }
   state = {
     filterModal: false,
-    sortModal: false
-    // dataBooking: this.props.navigation.state.params.data_booking
+    sortModal: false,
+    dataBooking: this.props.navigation.state.params.data_booking
   };
 
   getSchedule = () => {
@@ -99,9 +99,10 @@ class Terminal extends Component {
     this.props.dispatch(getScheduled(config));
   };
 
-  handleSchedule = () => {
+  handleSchedule = id_schedule => {
     this.props.navigation.navigate('Detail', {
-      detail_bus: this.props.getSchedule.data.data.data.result
+      detail_bus: this.props.getSchedule.data.data.data.result,
+      id_schedule: id_schedule
     });
   };
 
@@ -301,7 +302,7 @@ class Terminal extends Component {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => this.handleSchedule()}
+                onPress={() => this.handleSchedule(item.id)}
                 style={styles.content}>
                 <View style={styles.row}>
                   <Text style={styles.nameBus}>{item.name}</Text>
