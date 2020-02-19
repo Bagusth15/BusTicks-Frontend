@@ -12,7 +12,6 @@ import { faCity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import SplashScreen from 'react-native-splash-screen';
 import styles from './styles';
-
 import { connect } from 'react-redux';
 import { getTerminal } from './action';
 
@@ -163,6 +162,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    auth: state.auth,
     terminal: state.terminal
   };
 };
