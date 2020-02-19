@@ -17,6 +17,7 @@ import TerminalPicker from '../Component/TerminalPicker';
 
 import Schedule from '../../App/Schedule/SchedulePicker';
 import Detail from '../../App/Detail/Detail';
+import Booking from '../../App/Booking/Booking';
 
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
@@ -65,6 +66,9 @@ const HomeScreen = createStackNavigator({
   },
   Detail: {
     screen: Detail
+  },
+  Booking: {
+    screen: Booking
   }
 });
 

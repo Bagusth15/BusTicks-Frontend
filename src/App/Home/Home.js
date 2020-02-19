@@ -47,8 +47,6 @@ class Home extends React.Component {
   };
 
   render() {
-    // console.log(this.props.terminal.dataTerminal.data);
-    // console.log(this.state.chosenDate.toString().substr(4, 12));
     return (
       <View style={styles.wrapper}>
         <StatusBar backgroundColor="#0091ff" barStyle="light-content" />
