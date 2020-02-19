@@ -13,7 +13,7 @@ import Home from '../../App/Home';
 import Account from '../../App/Account';
 import Login from '../../Auth/Login';
 import Schedule from '../../App/Schedule/SchedulePicker';
-import SeatBus from '../Component/SeatPicker';
+// import SeatBus from '../Component/SeatPicker';
 import History from '../../App/History/history';
 import Detail from '../../App/Detail/Detail';
 
