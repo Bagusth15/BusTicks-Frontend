@@ -53,7 +53,6 @@ class Terminal extends Component {
   };
 
   handleReset = () => {
-    // this.props.dispatch(getScheduled());
     this.getSchedule();
   };
 
