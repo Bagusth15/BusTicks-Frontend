@@ -7,7 +7,7 @@ class payment extends Component {
       <WebView
         source={{
           uri:
-            'https://app.sandbox.midtrans.com/snap/v2/vtweb/dc5eefd4-9823-420c-a23a-40c9e91979d4'
+            'https://app.sandbox.midtrans.com/snap/v2/vtweb/c2a7d99e-b8d7-4998-8299-2763e217b210'
         }}
       />
     );
