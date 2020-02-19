@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { connect } from 'react-redux';
-import { ListItem, Icon } from 'react-native-elements';
+import { ListItem, Icon, Overlay } from 'react-native-elements';
 import toast from '../../Public/Component/Toast';
 import Modal, {
   SlideAnimation,
@@ -42,6 +42,24 @@ class Home extends Component {
   render() {
     return (
       <View>
+        {this.props.auth.data.image === undefined ? (
+          <Overlay
+            isVisible={this.state.isVisible}
+            height={500}
+            overlayBackgroundColor={'#0091ff'}
+            onBackdropPress={() => this.setState({ isVisible: false })}>
+            <View style={styles.headadsImage}>
+              <Image
+                style={styles.adsImage}
+                source={require('../../Public/Assets/Image/30persen.png')}
+              />
+            </View>
+            <Text style={styles.titleads}>
+              Let's go Regis and get the discount
+            </Text>
+            <Text style={styles.titleads2}> Event start from: 21/02/2020 </Text>
+          </Overlay>
+        ) : null}
         <View style={styles.container}>
           {this.props.auth.data.token === undefined ? (
             <View style={styles.header1}>
@@ -189,6 +207,26 @@ export default connect(
 )(Home);
 
 const styles = StyleSheet.create({
+  titleads: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  titleads2: {
+    fontSize: 12,
+    color: 'white',
+    alignSelf: 'center',
+    marginTop: 50
+  },
+  adsImage: {
+    height: 200,
+    width: 160
+  },
+  headadsImage: {
+    alignItems: 'center',
+    marginTop: 50
+  },
   title: {
     color: 'black',
     fontSize: 14
@@ -234,11 +272,10 @@ const styles = StyleSheet.create({
     elevation: 7
   },
   headertextcondition2: {
-    marginRight: 15,
-    padding: 10
+    padding: 2
   },
   information: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
     marginBottom: 10
   },

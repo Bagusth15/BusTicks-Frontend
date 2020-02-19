@@ -22,6 +22,7 @@ import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
 import Verification from '../../Auth/ForgetPassword/verificationpassword';
+import Payment from '../../App/Payment/payment';
 
 const AccountScreen = createStackNavigator({
   Account: {
@@ -65,6 +66,9 @@ const HomeScreen = createStackNavigator({
   },
   Detail: {
     screen: Detail
+  },
+  Payment: {
+    screen: Payment
   },
   Booking: {
     screen: Booking
