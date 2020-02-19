@@ -1,12 +1,11 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
+
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faHome,
   faUserCircle,
-  faListAlt,
   faEnvelopeOpenText
 } from '@fortawesome/free-solid-svg-icons';
 import Regis from '../../Auth/Regis/Regis';
@@ -15,17 +14,15 @@ import Account from '../../App/Account';
 import Login from '../../Auth/Login';
 
 import TerminalPicker from '../Component/TerminalPicker';
-import SchedulePicker from '../../App/Schedule/SchedulePicker';
+
+import Schedule from '../../App/Schedule/SchedulePicker';
+import SeatBus from '../Component/SeatPicker';
 
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
 import Verification from '../../Auth/ForgetPassword/verificationpassword';
-class SettingsScreen extends React.Component {
-  render() {
-    return <SchedulePicker />;
-  }
-}
+
 class TerminalScreen extends React.Component {
   render() {
     return <TerminalPicker />;
@@ -56,6 +53,18 @@ const AccountScreen = createStackNavigator({
   }
 });
 
+const HomeScreen = createStackNavigator({
+  Home: {
+    screen: Home
+  },
+  Schedule: {
+    screen: Schedule
+  },
+  SeatBus: {
+    screen: SeatBus
+  }
+});
+
 AccountScreen.navigationOptions = ({ navigation }) => {
   let tabBarVisible;
   if (navigation.state.routes.length > 1) {
@@ -77,24 +86,24 @@ AccountScreen.navigationOptions = ({ navigation }) => {
   };
 };
 
-const TabNavigator = createBottomTabNavigator(
+export default createBottomTabNavigator(
   {
     Home: {
-      screen: Home,
+      screen: HomeScreen,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => (
           <FontAwesomeIcon icon={faHome} color={tintColor} size={22} />
         )
       })
     },
-    Booking: {
-      screen: SettingsScreen,
-      navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesomeIcon icon={faListAlt} color={tintColor} size={22} />
-        )
-      })
-    },
+    // Booking: {
+    //   screen: SettingsScreen,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <FontAwesomeIcon icon={faListAlt} color={tintColor} size={22} />
+    //     )
+    //   })
+    // },
     Inbox: {
       screen: TerminalScreen,
       navigationOptions: () => ({
@@ -127,5 +136,3 @@ const TabNavigator = createBottomTabNavigator(
     }
   }
 );
-
-export default createAppContainer(TabNavigator, AccountScreen);

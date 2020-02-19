@@ -19,7 +19,7 @@ const getTerminal = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload
+        dataTerminal: action.payload.data
       };
     default:
       return state;

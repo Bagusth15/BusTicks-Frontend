@@ -23,7 +23,8 @@ class Terminal extends Component {
   }
   state = {
     filterModal: false,
-    sortModal: false
+    sortModal: false,
+    dataBooking: this.props.navigation.state.params.data_booking
   };
 
   changeSearch = text => {
@@ -68,6 +69,10 @@ class Terminal extends Component {
       }
     };
     this.props.dispatch(getScheduled(config));
+  };
+
+  handleSchedule = () => {
+    this.props.navigation.navigate('SeatBus');
   };
 
   render() {
@@ -246,7 +251,9 @@ class Terminal extends Component {
           data={data}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity style={styles.content}>
+              <TouchableOpacity
+                onPress={() => this.handleSchedule()}
+                style={styles.content}>
                 <View style={styles.row}>
                   <Text style={styles.nameBus}>{item.name}</Text>
                   <NumberFormat

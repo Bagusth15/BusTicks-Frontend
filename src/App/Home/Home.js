@@ -43,11 +43,11 @@ class Home extends React.Component {
   }
 
   onPress = () => {
-    console.log(this.state);
+    this.props.navigation.navigate('Schedule', { data_booking: this.state });
   };
 
   render() {
-    // console.log(this.props.terminal.listTerminal);
+    // console.log(this.props.terminal.dataTerminal.data);
     // console.log(this.state.chosenDate.toString().substr(4, 12));
     return (
       <View style={styles.wrapper}>
@@ -63,8 +63,8 @@ class Home extends React.Component {
               </View>
               <View style={styles.itemListChild2}>
                 <RNPicker
-                  dataSource={this.props.terminal.listTerminal}
-                  dummyDataSource={this.props.terminal.listTerminal}
+                  dataSource={this.props.terminal.dataTerminal.data}
+                  dummyDataSource={this.props.terminal.dataTerminal.data}
                   defaultValue={false}
                   showSearchBar={true}
                   disablePicker={false}
@@ -91,8 +91,8 @@ class Home extends React.Component {
               </View>
               <View style={styles.itemListChild2}>
                 <RNPicker
-                  dataSource={this.props.terminal.listTerminal}
-                  dummyDataSource={this.props.terminal.listTerminal}
+                  dataSource={this.props.terminal.dataTerminal.data}
+                  dummyDataSource={this.props.terminal.dataTerminal.data}
                   defaultValue={false}
                   showSearchBar={true}
                   disablePicker={false}
