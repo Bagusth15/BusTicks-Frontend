@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import NumberFormat from 'react-number-format';
 import styles from './styles';
 
 class Detail extends Component {
@@ -7,8 +8,11 @@ class Detail extends Component {
     detail: this.props.navigation.state.params.detail_bus[0]
   };
 
+  onPress = () => {
+    this.props.navigation.navigate('Booking');
+  };
+
   render() {
-    console.log(this.state.detail);
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
@@ -17,12 +21,48 @@ class Detail extends Component {
               <View>
                 <Text style={styles.busname}>{this.state.detail.name}</Text>
               </View>
-              <Text>Specification</Text>
-              <Text>Seat capacity: {this.state.detail.total_seat}</Text>
-              <Text>{this.state.detail.format_seat}</Text>
-              <Text>{this.state.detail.price}</Text>
+              <Text style={styles.spec}>Specification</Text>
+              <View style={styles.col}>
+                <View style={styles.row}>
+                  <Text>Seat capacity</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text>{this.state.detail.total_seat}</Text>
+                </View>
+              </View>
+
+              <View style={styles.col}>
+                <View style={styles.row}>
+                  <Text>Seat format</Text>
+                </View>
+                <View style={styles.row}>
+                  <Text>{this.state.detail.format_seat}</Text>
+                </View>
+              </View>
+
+              <View style={styles.col}>
+                <View style={styles.row}>
+                  <Text>Price per seat</Text>
+                </View>
+                <View style={styles.row}>
+                  <NumberFormat
+                    value={this.state.detail.price}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp '}
+                    renderText={value => (
+                      <Text style={styles.price}>{value}</Text>
+                    )}
+                  />
+                </View>
+              </View>
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.onPress()}>
+            <Text style={styles.buttonText}>Select</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

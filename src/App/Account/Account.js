@@ -234,11 +234,10 @@ const styles = StyleSheet.create({
     elevation: 7
   },
   headertextcondition2: {
-    marginRight: 15,
-    padding: 10
+    padding: 2
   },
   information: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
     marginBottom: 10
   },

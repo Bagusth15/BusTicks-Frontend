@@ -16,6 +16,7 @@ import Schedule from '../../App/Schedule/SchedulePicker';
 // import SeatBus from '../Component/SeatPicker';
 import History from '../../App/History/history';
 import Detail from '../../App/Detail/Detail';
+import Booking from '../../App/Booking/Booking';
 
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
@@ -68,6 +69,9 @@ const HomeScreen = createStackNavigator({
   },
   Payment: {
     screen: Payment
+  },
+  Booking: {
+    screen: Booking
   }
 });
 
@@ -102,14 +106,6 @@ export default createBottomTabNavigator(
         )
       })
     },
-    // Booking: {
-    //   screen: SettingsScreen,
-    //   navigationOptions: () => ({
-    //     tabBarIcon: ({ tintColor }) => (
-    //       <FontAwesomeIcon icon={faListAlt} color={tintColor} size={22} />
-    //     )
-    //   })
-    // },
     Inbox: {
       screen: HistoryScreen,
       navigationOptions: () => ({
