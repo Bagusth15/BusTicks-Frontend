@@ -6,8 +6,12 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+<<<<<<< HEAD
 import DatePicker from 'react-native-datepicker';
 import RNPicker from 'rn-modal-picker';
+=======
+import RNPickerSelect from 'react-native-picker-select';
+>>>>>>> 4a05b696dcfa0ef8f923208d80a0b49e7e3b735a
 import { faCity } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import SplashScreen from 'react-native-splash-screen';
@@ -21,6 +25,9 @@ class Home extends React.Component {
     SplashScreen.hide();
     this.props.dispatch(getTerminal());
   }
+  static navigationOptions = {
+    header: null
+  };
 
   constructor(props) {
     super(props);
