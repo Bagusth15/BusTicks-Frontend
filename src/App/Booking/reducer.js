@@ -23,6 +23,10 @@ const booking = (state = initialState, action) => {
         ...state,
         data: delete_item
       };
+    case 'RESET_BOOKING_FULFILLED':
+      return {
+        data: []
+      };
     default:
       return state;
   }

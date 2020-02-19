@@ -32,7 +32,10 @@ class Detail extends Component {
       axios
         .post(`${API_HOST}/booking`, body)
         .then(res => {
-          console.log(res);
+          const url = res.data.data[0].payment_link;
+          this.props.navigation.navigate('Payment', { url: url });
+          this.props.resetBooking();
+          toast('Success booking');
         })
         .catch(err => {
           console.log(err);
@@ -150,6 +153,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: 'DELETE_BOOKING_FULFILLED',
       item
+    }),
+  resetBooking: payload =>
+    dispatch({
+      type: 'RESET_BOOKING_FULFILLED',
+      payload
     })
 });
 
