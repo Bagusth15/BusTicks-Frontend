@@ -23,8 +23,8 @@ class Terminal extends Component {
   }
   state = {
     filterModal: false,
-    sortModal: false
-    // dataBooking: this.props.navigation.state.params.data_booking
+    sortModal: false,
+    dataBooking: this.props.navigation.state.params.data_booking
   };
 
   getSchedule = () => {
