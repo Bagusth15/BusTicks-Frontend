@@ -18,6 +18,13 @@ const styles = {
     borderBottomRightRadius: 2,
     justifyContent: 'center'
   },
+  welcometext: {
+    color: '#0091ff',
+    fontSize: 20,
+
+    marginBottom: 20,
+    marginLeft: 5
+  },
   content: {
     padding: 10,
     paddingLeft: 20,
@@ -57,12 +64,14 @@ const styles = {
   itemListChild2: {
     flex: 0.9
   },
+  datePicker: {
+    width: '100%'
+  },
 
   heading: {
     fontSize: 16,
     paddingTop: 10,
-    paddingBottom: 10,
-    color: '#0a1e2d'
+    paddingBottom: 10
   },
   lineOption: {
     borderBottomWidth: 1.6,
@@ -70,10 +79,11 @@ const styles = {
     width: '90%',
     borderColor: '#c3c4c6'
   },
-  optionSelect: {
-    fontSize: 16,
-    marginTop: 15,
-    color: '#c3c4c6'
+
+  selectItem: {
+    paddingLeft: 8,
+    color: '#0a1e2d',
+    fontSize: 16
   },
   listCityText: {
     fontSize: 18,

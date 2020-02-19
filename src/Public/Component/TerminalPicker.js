@@ -316,7 +316,6 @@ const styles = StyleSheet.create({
   },
   header: {
     height: 60,
-
     backgroundColor: '#0091ff',
     elevation: 7,
     paddingLeft: 20,

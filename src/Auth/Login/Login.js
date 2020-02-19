@@ -7,20 +7,20 @@ import {
   Text,
   ScrollView,
   Image,
-  TextInput,
-  ToastAndroid
+  TextInput
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import qs from 'qs';
 import { API_HOST } from 'react-native-dotenv';
+import { Icon } from 'react-native-elements';
+import toast from '../../Public/Component/Toast';
 class Login extends Component {
   // static navigationOptions = { headerShown: false };
   componentDidMount() {
     SplashScreen.hide();
   }
-  static navigationOptions = { tabBarVisible: false };
   state = {
     username: '',
     password: ''
@@ -41,30 +41,27 @@ class Login extends Component {
       .then(response => {
         const { msg } = response.data;
         if (msg === undefined) {
-          this.props.navigation.navigate('Home');
+          this.props.navigation.navigate('Account');
           this.props.setDataLogin(response.data.data);
+          toast('Success Login');
         } else {
           msg.map((item, index) => {
-            ToastAndroid.showWithGravity(
-              item.error,
-              ToastAndroid.LONG,
-              ToastAndroid.BOTTOM
-            );
+            toast(item.error);
           });
         }
       })
       .catch(() => {
-        ToastAndroid.showWithGravity(
-          'Cannot login please check your username and password',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM
-        );
+        toast('Cannot login please check your username and password');
       });
   };
 
   handleRegis = () => {
     this.props.navigation.navigate('Regis');
   };
+  handleforget = () => {
+    this.props.navigation.navigate('Forgetpassword');
+  };
+
   render() {
     return (
       <ScrollView>
@@ -92,6 +89,9 @@ class Login extends Component {
                       placeholder="Username"
                       onChangeText={text => this.handleInput(text, 'username')}
                     />
+                    <View style={styles.iconpass}>
+                      <Icon name="person" type="material" />
+                    </View>
                   </View>
                   <View style={styles.logininput}>
                     <TextInput
@@ -100,19 +100,26 @@ class Login extends Component {
                       secureTextEntry
                       onChangeText={text => this.handleInput(text, 'password')}
                     />
+                    <View style={styles.iconpass}>
+                      <Icon name="https" type="material" />
+                    </View>
                   </View>
-                  <TouchableOpacity>
-                    <View style={styles.headforget}>
-                      <Text style={styles.forget}>Forget the password?</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    activeOpacity={0.6}
-                    onPress={() => this.handleLogin()}>
-                    <View style={styles.buttonlogin}>
-                      <Text style={styles.textsubmitlogin}>LOGIN</Text>
-                    </View>
-                  </TouchableOpacity>
+                  <View style={styles.containerforget}>
+                    <TouchableOpacity onPress={() => this.handleforget()}>
+                      <View style={styles.headforget}>
+                        <Text style={styles.forget}>Forget the password?</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.containersubmit}>
+                    <TouchableOpacity
+                      activeOpacity={0.6}
+                      onPress={() => this.handleLogin()}>
+                      <View style={styles.buttonlogin}>
+                        <Text style={styles.textsubmitlogin}>LOGIN</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
                 </View>
                 <View style={styles.header3}>
                   <Text style={styles.account}>Don't have an account?</Text>
@@ -155,14 +162,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#0091ff'
   },
+  iconpass: {
+    position: 'absolute',
+    right: 15,
+    top: 10
+  },
   background: {
     width: '100%',
     height: '100%'
   },
   header2: {
-    flex: 0.4,
-    padding: 20,
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 5
   },
   image: {
     width: 300,
@@ -171,25 +182,29 @@ const styles = StyleSheet.create({
   header3: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 5
   },
   welcometext: {
     alignItems: 'flex-start'
   },
   logininput: {
-    borderWidth: 1.5,
-    borderRadius: 15,
-    paddingLeft: 5,
-    marginTop: 10,
-    backgroundColor: '#f4f6f8'
+    borderRadius: 30,
+    paddingHorizontal: 12,
+    marginTop: 16,
+    backgroundColor: 'white',
+    elevation: 5
   },
   buttonlogin: {
-    margin: 12,
+    marginTop: 16,
     marginBottom: 15,
     borderRadius: 30,
     backgroundColor: '#0091ff',
     padding: 10,
     alignItems: 'center'
+  },
+  containersubmit: {
+    margin: 10
   },
   textsubmitlogin: {
     color: 'white',
@@ -219,7 +234,6 @@ const styles = StyleSheet.create({
     fontSize: 12
   },
   subheader2: {
-    flex: 0.6,
     backgroundColor: 'white',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40
@@ -230,8 +244,11 @@ const styles = StyleSheet.create({
     padding: 20
   },
   headforget: {
-    alignItems: 'flex-start',
-    left: 12,
-    marginTop: 10
+    alignItems: 'flex-end',
+    marginTop: 10,
+    padding: 5
+  },
+  containerforget: {
+    margin: 5
   }
 });
