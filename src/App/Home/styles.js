@@ -3,11 +3,11 @@ const styles = {
     flex: 1,
     backgroundColor: '#f4f6f8'
   },
-  header: {
-    height: 60,
-    backgroundColor: '#0091ff',
-    elevation: 7
-  },
+  // header: {
+  //   height: 60,
+  //   backgroundColor: '#0091ff',
+  //   elevation: 7
+  // },
   container: {
     flex: 1,
     padding: 20,

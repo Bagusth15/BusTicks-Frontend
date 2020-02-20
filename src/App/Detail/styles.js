@@ -36,9 +36,29 @@ const styles = {
 
     backgroundColor: '#fff'
   },
+  contentList: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 25,
+    paddingTop: 20,
+    marginBottom: 20,
+    borderRadius: 15,
+    justifyContent: 'center',
+    elevation: 3,
+    flexDirection: 'row',
+    backgroundColor: '#fff'
+  },
+  ListContainer: { flex: 1 },
   button: {
     padding: 10,
     borderRadius: 20,
+    marginBottom: 16,
+    backgroundColor: '#0091ff'
+  },
+  button2: {
+    padding: 10,
+    borderRadius: 20,
+    marginVertical: 16,
     backgroundColor: '#0091ff'
   },
   buttonText: {

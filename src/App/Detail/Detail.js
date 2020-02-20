@@ -1,18 +1,54 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { Icon } from 'react-native-elements';
 import NumberFormat from 'react-number-format';
 import styles from './styles';
+import toast from '../../Public/Component/Toast';
+import { API_HOST } from 'react-native-dotenv';
+import axios from 'axios';
 
 class Detail extends Component {
   state = {
-    detail: this.props.navigation.state.params.detail_bus[0]
+    detail: this.props.navigation.state.params.detail_bus[0],
+    id_schedule: this.props.navigation.state.params.id_schedule
   };
 
   onPress = () => {
     this.props.navigation.navigate('Booking');
   };
 
+  onPressSubmit = () => {
+    let dataAuth = this.props.auth.data;
+    if (dataAuth === undefined || dataAuth === null || dataAuth.length === 0) {
+      this.props.navigation.navigate('Login');
+      toast('Please login !');
+    } else {
+      const body = {
+        id_user: this.props.auth.data.id,
+        id_schedule: this.state.id_schedule,
+        booking: this.props.booking.data
+      };
+      axios
+        .post(`${API_HOST}/booking`, body)
+        .then(res => {
+          const url = res.data.data[0].payment_link;
+          this.props.navigation.navigate('Payment', { url: url });
+          this.props.resetBooking();
+          toast('Success booking');
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
+  onPressDeleteList = item => {
+    this.props.deleteBooking(item);
+  };
+
   render() {
+    const data = this.props.booking.data;
     return (
       <View style={styles.wrapper}>
         <View style={styles.container}>
@@ -61,12 +97,71 @@ class Detail extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => this.onPress()}>
-            <Text style={styles.buttonText}>Select</Text>
+            <Text style={styles.buttonText}>Order Seat</Text>
           </TouchableOpacity>
+          <FlatList
+            data={data}
+            style={{
+              paddingHorizontal: 10,
+              paddingTop: 10
+            }}
+            keyExtractor={item => item.no_identity}
+            renderItem={({ item, index }) => {
+              return (
+                <View style={styles.contentList}>
+                  <View style={styles.ListContainer}>
+                    <Text style={styles.busname}>{item.no_identity}</Text>
+                  </View>
+                  <View style={styles.ListContainer}>
+                    <Text style={styles.busname}>{item.name}</Text>
+                  </View>
+                  <View style={styles.ListContainer}>
+                    <Text style={styles.busname}>Seat: {item.seat}</Text>
+                  </View>
+                  <View style={styles.ListContainer}>
+                    <TouchableOpacity
+                      onPress={() => this.onPressDeleteList(item)}>
+                      <Icon name="delete" type="material" />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              );
+            }}
+          />
+          {data.length > 0 ? (
+            <TouchableOpacity
+              hidden={true}
+              style={styles.button2}
+              onPress={() => this.onPressSubmit()}>
+              <Text style={styles.buttonText}>Booking</Text>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     );
   }
 }
 
-export default Detail;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    booking: state.booking
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  deleteBooking: item =>
+    dispatch({
+      type: 'DELETE_BOOKING_FULFILLED',
+      item
+    }),
+  resetBooking: payload =>
+    dispatch({
+      type: 'RESET_BOOKING_FULFILLED',
+      payload
+    })
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Detail);

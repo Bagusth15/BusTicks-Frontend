@@ -65,6 +65,23 @@ const styles = {
   row: {
     flex: 0.4,
     backgroundColor: 'red'
+  },
+  picker: {
+    marginLeft: 5,
+    paddingRight: 25,
+    marginBottom: 2,
+    shadowOpacity: 1.0
+  },
+  titlePicker: {
+    fontSize: 14,
+    paddingLeft: 5,
+    marginTop: 2
+  },
+  titleFormation: {
+    fontSize: 14,
+    paddingLeft: 5,
+    marginTop: 2,
+    color: '#0091ff'
   }
 };
 export default styles;

@@ -13,6 +13,7 @@ import { API_HOST } from 'react-native-dotenv';
 class Home extends Component {
   componentDidMount() {
     SplashScreen.hide();
+    this.props.getHistory();
   }
   state = {
     aboutus: false
@@ -184,7 +185,8 @@ class Home extends Component {
 
 const mapStateProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    historybook: state.history
   };
 };
 
@@ -197,6 +199,11 @@ const mapDispatchToProps = dispatch => ({
   setRemoveHistory: payload =>
     dispatch({
       type: 'HISTORY_EMPTY',
+      payload
+    }),
+  getHistory: payload =>
+    dispatch({
+      type: 'GET_HISTORY',
       payload
     })
 });

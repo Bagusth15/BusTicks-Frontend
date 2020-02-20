@@ -20,9 +20,9 @@ class Home extends React.Component {
     SplashScreen.hide();
     this.props.dispatch(getTerminal());
   }
-  static navigationOptions = {
-    header: null
-  };
+  // static navigationOptions = {
+  //   header: null
+  // };
 
   constructor(props) {
     super(props);

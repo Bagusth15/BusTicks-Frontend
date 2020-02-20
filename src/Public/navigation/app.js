@@ -17,7 +17,7 @@ import Schedule from '../../App/Schedule/SchedulePicker';
 import History from '../../App/History/history';
 import Detail from '../../App/Detail/Detail';
 import Booking from '../../App/Booking/Booking';
-
+import Seat from '../Component/SeatPicker';
 import Editprofile from '../../App/Editprofile/Editprofile';
 import Changepassword from '../../Auth/ChangePassword/changepassword';
 import Forgetpassword from '../../Auth/ForgetPassword/forgetpassword';
@@ -72,6 +72,9 @@ const HomeScreen = createStackNavigator({
   },
   Booking: {
     screen: Booking
+  },
+  Seat: {
+    screen: Seat
   }
 });
 
